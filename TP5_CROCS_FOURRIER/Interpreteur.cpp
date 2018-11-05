@@ -73,24 +73,70 @@ Noeud* Interpreteur::seqInst() {
 Noeud* Interpreteur::inst() {
   // <inst> ::= <affectation>  ; | <instSi>
   if (m_lecteur.getSymbole() == "<VARIABLE>") {
+      try {
     Noeud *affect = affectation();
     testerEtAvancer(";");
     return affect;
+      }
+      catch (InterpreteurException & e) {
+          cout << e.what() << endl;
+          m_lecteur.avancer();
+      }
   }
   // Compléter les alternatives chaque fois qu'on rajoute une nouvelle instruction
-  else if (m_lecteur.getSymbole() == "si")//alternative pour si/siRiche
+  else if (m_lecteur.getSymbole() == "si"){//alternative pour si/siRiche
+      try{
     return instSi();
-  
-  else if (m_lecteur.getSymbole() == "tantque")//alternative pour tant que
+      }
+      catch (InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
+  else if (m_lecteur.getSymbole() == "tantque"){//alternative pour tant que
+      try{
       return insTantQue();
-  else if (m_lecteur.getSymbole() == "repeter")
+      }
+      catch(InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
+  else if (m_lecteur.getSymbole() == "repeter"){
+      try{
       return instRepeter();
-  else if (m_lecteur.getSymbole() == "pour")
-      return instPour();
-  else if (m_lecteur.getSymbole() == "ecrire")
+      }
+      catch(InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
+  else if (m_lecteur.getSymbole() == "pour"){
+      try{
+          return instPour();
+      }
+      catch(InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
+  else if (m_lecteur.getSymbole() == "ecrire"){
+      try{
       return instEcrire();
-  else if (m_lecteur.getSymbole() == "lire")
-      return instLire();
+      }
+      catch(InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
+  else if (m_lecteur.getSymbole() == "lire"){
+      try{
+      return instLire();}
+      catch(InterpreteurException & e){
+          cout<<e.what()<<endl;
+          m_lecteur.avancer();
+      }
+  }
   else erreur("Instruction incorrecte");
 }
 

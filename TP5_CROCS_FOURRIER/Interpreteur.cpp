@@ -301,3 +301,9 @@ Noeud* Interpreteur::instLire() {
     return new NoeudInstLire(variablesLire);
 }
 
+void Interpreteur::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout << setw(4*indentation) << "" << "int main() {"endl;
+    getArbre()->traduitCPP(cout,indentation+1);
+    cout
+}
+

@@ -169,7 +169,14 @@ int NoeudInstRepeter::executer(){
 }
 
 void NoeudInstRepeter::traduitCPP(ostream& cout, unsigned int indentation) const {
-    cout <<setw(4*indentation)<<""
+    cout <<setw(4*indentation)<<""<<"do {"<<endl;
+    m_sequenceRepeter->traduitCPP(cout, indentation+1);
+    cout<<""<<"}"<<endl;
+    
+    cout <<setw(4*indentation)<<""<<"while (";
+    m_conditionRepeter->traduitCPP(cout,0);
+    cout <<");"<<endl;
+    
 }
 
 
@@ -186,6 +193,20 @@ int NoeudInstPour::executer(){
         m_sequencePour->executer();
     }
 }
+
+void NoeudInstPour::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<< setw(4*indentation)<<""<<"for (";
+    m_affectation1Pour->traduitCPP(cout,0);
+    cout<<"; ";
+    m_conditionPour->traduitCPP(cout,0);
+    cout<<"; ";
+    m_affectation2Pour->traduitCPP(cout,0);
+    cout<<") {"<<endl;
+    
+    m_sequencePour->traduitCPP(cout,indentation+1);
+    cout<<setw(4*indentation)<<""<<"}"<<endl;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstEcrire

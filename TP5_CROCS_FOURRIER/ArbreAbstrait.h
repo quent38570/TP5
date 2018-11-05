@@ -126,6 +126,7 @@ public :
     NoeudInstPour(Noeud* affectation1, Noeud* condition, Noeud* affectation2,Noeud* sequence);
     ~NoeudInstPour(){}
     int executer();
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
     
 private :
     Noeud* m_conditionPour;

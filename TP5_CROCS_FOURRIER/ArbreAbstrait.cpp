@@ -22,6 +22,13 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
   if (instruction!=nullptr) m_instructions.push_back(instruction);
 }
 
+void NoeudSeqInst::traduitCPP(ostream& cout, unsigned int indentation) const {
+    for(unsigned int i =0;i<m_instructions.size();i++){
+    cout<< setw(indentation) <<""<<m_instructions[i]<<"\n";
+    }
+    cout<<endl;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudAffectation
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,6 +41,10 @@ int NoeudAffectation::executer() {
   int valeur = m_expression->executer(); // On exécute (évalue) l'expression
   ((SymboleValue*) m_variable)->setValeur(valeur); // On affecte la variable
   return 0; // La valeur renvoyée ne représente rien !
+}
+
+void NoeudAffectation::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<<setw(indentation)<<""<<m_variable<<m_expression<<endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,6 +79,11 @@ int NoeudOperateurBinaire::executer() {
   return valeur; // On retourne la valeur calculée
 }
 
+void NoeudOperateurBinaire::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<<setw(indentation)<<""<<m_operandeGauche<<" "<<m_operateur<<" "<<m_operandeDroit<<endl;
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstSi
 ////////////////////////////////////////////////////////////////////////////////
@@ -87,6 +103,32 @@ int NoeudInstSi::executer() {
   if (m_defaut != nullptr)
       return m_defaut->executer();
 }
+
+void
+void NoeudInstSi::traduitCPP(ostream & cout, unsigned int indentation) const {
+    cout << setw(4*indentation)<<""<<"if (";
+    m_condition[0]->traduitCPP(cout, 0);
+    cout << ") {"<<endl;
+    m_sequence[0]->traduitCPP(cout, indentation+1);
+    cout<<setw(4*indentation)<<""<<"}"<<endl;
+    
+    for (int i=1; i<m_condition.size();i++)
+    {
+        cout << setw(4*indentation)<<""<<"elseif (";
+    m_condition[i]->traduitCPP(cout, 0);
+    cout << ") {"<<endl;
+    m_sequence[i]->traduitCPP(cout, indentation+1);
+    cout<<setw(4*indentation)<<""<<"}"<<endl;
+    }
+    
+    if (m_defaut != nullptr) {
+    cout << setw(4*indentation)<<""<<"else (";
+    m_condition[0]->traduitCPP(cout, 0);
+    cout << ") {"<<endl;
+    m_sequence[0]->traduitCPP(cout, indentation+1);
+    cout<<setw(4*indentation)<<""<<"}"<<endl;
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstTantQue

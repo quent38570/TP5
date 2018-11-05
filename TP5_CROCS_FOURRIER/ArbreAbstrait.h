@@ -20,6 +20,7 @@ class Noeud {
     virtual int  executer() =0 ; // Méthode pure (non implémentée) qui rend la classe abstraite
     virtual void ajoute(Noeud* instruction) { throw OperationInterditeException(); }
     virtual ~Noeud() {} // Présence d'un destructeur virtuel conseillée dans les classes abstraites
+    virtual void traduitCPP(ostream & cout, unsigned int indentation) const;
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -31,6 +32,7 @@ class NoeudSeqInst : public Noeud {
     ~NoeudSeqInst() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();    // Exécute chaque instruction de la séquence
     void ajoute(Noeud* instruction);  // Ajoute une instruction à la séquence
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
 
   private:
     vector<Noeud *> m_instructions; // pour stocker les instructions de la séquence
@@ -44,7 +46,7 @@ class NoeudAffectation : public Noeud {
      NoeudAffectation(Noeud* variable, Noeud* expression); // construit une affectation
     ~NoeudAffectation() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();        // Exécute (évalue) l'expression et affecte sa valeur à la variable
-
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
   private:
     Noeud* m_variable;
     Noeud* m_expression;
@@ -59,7 +61,8 @@ class NoeudOperateurBinaire : public Noeud {
     // Construit une opération binaire : operandeGauche operateur OperandeDroit
    ~NoeudOperateurBinaire() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();            // Exécute (évalue) l'opération binaire)
-
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
+    
   private:
     Symbole m_operateur;
     Noeud*  m_operandeGauche;
@@ -75,6 +78,7 @@ class NoeudInstSi : public Noeud {
      // Construit une "instruction si" avec sa condition et sa séquence d'instruction
    ~NoeudInstSi() {} // A cause du destructeur virtuel de la classe Noeud
     int executer();  // Exécute l'instruction si : si condition vraie on exécute la séquence
+    void traduitCPP(ostream & cout, unsigned int indentation) const; // Traduit un noeud si en c++
 
   private:
     vector<Noeud*>  m_condition;
@@ -92,6 +96,7 @@ public :
     NoeudInstTantQue(Noeud* condition,Noeud* sequence);
     ~NoeudInstTantQue(){}
     int executer();
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
     
 private :
     Noeud* m_conditionTantQue;
@@ -106,6 +111,7 @@ public :
     NoeudInstRepeter(Noeud* condition,Noeud* sequence);
     ~NoeudInstRepeter(){}
     int executer();
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
     
 private :
     Noeud* m_conditionRepeter;

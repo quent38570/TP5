@@ -104,7 +104,6 @@ int NoeudInstSi::executer() {
       return m_defaut->executer();
 }
 
-void
 void NoeudInstSi::traduitCPP(ostream & cout, unsigned int indentation) const {
     cout << setw(4*indentation)<<""<<"if (";
     m_condition[0]->traduitCPP(cout, 0);
@@ -122,11 +121,10 @@ void NoeudInstSi::traduitCPP(ostream & cout, unsigned int indentation) const {
     }
     
     if (m_defaut != nullptr) {
-    cout << setw(4*indentation)<<""<<"else (";
-    m_condition[0]->traduitCPP(cout, 0);
-    cout << ") {"<<endl;
-    m_sequence[0]->traduitCPP(cout, indentation+1);
+    cout << setw(4*indentation)<<""<<"else {";
+    m_defaut->traduitCPP(cout, indentation+1);
     cout<<setw(4*indentation)<<""<<"}"<<endl;
+}
 }
 
 
@@ -145,6 +143,15 @@ int NoeudInstTantQue::executer(){
     return 0;
 }
 
+void NoeudInstTantQue::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<<setw(4*indentation)<<""<< "while (";
+    m_conditionTantQue->traduitCPP(cout, 0);
+    cout<<") {"<<endl;
+    m_sequenceTantQue->traduitCPP(cout, indentation+1);
+    cout << setw(4*indentation)<<""<<"}" << endl;
+}
+
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstRepeter
@@ -160,6 +167,11 @@ int NoeudInstRepeter::executer(){
     while(m_conditionRepeter->executer());
     return 0;//pas de sens
 }
+
+void NoeudInstRepeter::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout <<setw(4*indentation)<<""
+}
+
 
 ////////////////////////////////////////////////////////////////////////////////
 // NoeudInstPour

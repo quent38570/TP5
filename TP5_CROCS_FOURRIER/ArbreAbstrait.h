@@ -143,6 +143,7 @@ public :
     NoeudInstEcrire(vector<Noeud*> noeuds);
     ~NoeudInstEcrire(){}
     int executer();
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
     
 private :
     vector<Noeud*> m_noeuds;
@@ -156,6 +157,7 @@ public :
     NoeudInstLire(vector<Noeud*> variables);
     ~NoeudInstLire(){}
     int executer();
+    void traduitCPP(ostream & cout, unsigned int indentation) const;
     
 private :
     vector<Noeud*> m_variables_Lire;

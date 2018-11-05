@@ -304,6 +304,7 @@ Noeud* Interpreteur::instLire() {
 void Interpreteur::traduitCPP(ostream& cout, unsigned int indentation) const {
     cout << setw(4*indentation) << "" << "int main() {"endl;
     getArbre()->traduitCPP(cout,indentation+1);
-    cout
+    cout<<setw(4*(indentation+1))<<""<<"return 0;"<<endl;
+    cout<<setw(4*indentation)<<"}"<<endl;
 }
 

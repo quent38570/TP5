@@ -232,6 +232,19 @@ int NoeudInstEcrire::executer(){
     return 0;
 }
 
+void NoeudInstEcrire::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<<setw(4*indentation)<<""<<"cout <<";
+    for(int i=0;i<m_noeuds.size();i++){
+        m_noeuds[i]->traduitCPP(cout,0);
+        cout << "<<";
+    }
+    cout << endl;
+}
+
+
+////////////////////////////////////////////////////////////////////////////////
+// NoeudInstLire
+////////////////////////////////////////////////////////////////////////////////
 NoeudInstLire::NoeudInstLire(vector<Noeud*> variables)
 :m_variables_Lire(variables){
 
@@ -244,4 +257,13 @@ int NoeudInstLire::executer(){
         ((SymboleValue*)m_variables_Lire[i])->setValeur(v);
     }
     return 0;
+}
+
+void NoeudInstLire::traduitCPP(ostream& cout, unsigned int indentation) const {
+    cout<<setw(4*indentation)<<""<<"cin >>";
+    for(int i=0;i<m_variables_Lire.size();i++){
+        cout<<m_variables_Lire[i]->traduitCPP(cout,0);
+        cout<<">>";
+    }
+    cout<<";"<<endl;
 }

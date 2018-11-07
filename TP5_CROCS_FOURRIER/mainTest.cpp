@@ -8,7 +8,7 @@ int main(int argc, char* argv[]) {
   string etat = "next";
   int i = -1;
   
-  std::vector<std::string> nomFichs = {"testRepeter.txt","testSi.txt","testTantQue.txt","testEcrire.txt","testLire.txt","testPour.txt","testErreur.txt"};
+  std::vector<std::string> nomFichs = {"testSi.txt","testTantQue.txt","testRepeter.txt","testPour.txt","testEcrire.txt","testLire.txt","testErreur.txt"};
   while(etat == "next"){
       i++;
       cout << "Nom du fichier test: " << nomFichs[i] << endl;

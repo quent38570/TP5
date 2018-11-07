@@ -1,0 +1,16 @@
+# Fichier de test du Lire
+# Résultat attendu:
+#   (le chiffre choisi) + 2
+#   
+
+procedure principale()
+    a = 1;
+
+    ## Exemple avec un lire
+    lire(a);
+    
+    ## Utilisation de la variable lu
+    ecrire(a+2);
+
+finproc
+

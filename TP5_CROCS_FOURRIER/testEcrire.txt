@@ -1,0 +1,15 @@
+# Fichier de test du Ecrire
+# Résultat attendu:
+#   2
+#   3
+#   5
+
+procedure principale()
+    a = 3;
+    
+    ## Exemple avec un Ecrire->Entier
+    ecrire(2);
+    ecrire(a);
+    ecrire(a+2);
+finproc
+

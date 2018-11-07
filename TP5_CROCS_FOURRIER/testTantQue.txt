@@ -1,0 +1,20 @@
+# Fichier de test du TantQue
+# Résultat attendu: 
+#   test = 5
+#   i = 10
+
+procedure principale()
+    
+    test = 1;
+    i = 1;
+
+    ## Exemple avec un TantQue
+    tantque(i < 10)
+        i = i+1;
+        si(i == 5)
+           test = 5;
+        finsi
+    fintantque
+
+finproc
+

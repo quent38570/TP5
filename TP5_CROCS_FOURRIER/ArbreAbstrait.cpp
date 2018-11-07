@@ -26,8 +26,9 @@ void NoeudSeqInst::ajoute(Noeud* instruction) {
 
 void NoeudSeqInst::traduitCPP(ostream& cout, unsigned int indentation) const {
     for(unsigned int i =0;i<m_instructions.size();i++){
-    cout<< setw(indentation);
+        cout<<setw(4*indentation)<<"";
     m_instructions[i]->traduitCPP(cout,0);
+    cout<<";"<<endl;
     }
 }
 
@@ -50,7 +51,6 @@ void NoeudAffectation::traduitCPP(ostream& cout, unsigned int indentation) const
     m_variable->traduitCPP(cout,indentation);
     cout << " = ";
     m_expression->traduitCPP(cout,indentation);
-    cout<<";"<<endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -90,7 +90,6 @@ void NoeudOperateurBinaire::traduitCPP(ostream& cout, unsigned int indentation) 
     m_operandeGauche->traduitCPP(cout,indentation);
     cout<<" "<<m_operateur.getChaine()<<" ";
     m_operandeDroit->traduitCPP(cout,indentation);
-    cout<<";"<<endl;
 }
 
 
@@ -131,9 +130,9 @@ void NoeudInstSi::traduitCPP(ostream & cout, unsigned int indentation) const {
     }
     
     if (m_defaut != nullptr) {
-    cout << setw(4*indentation)<<""<<"else {";
+    cout << setw(4*indentation)<<""<<"else {"<<endl;
     m_defaut->traduitCPP(cout, indentation+1);
-    cout<<setw(4*indentation)<<""<<"}"<<endl;
+    cout<<setw(4*indentation)<<""<<"}\n"<<endl;
 }
 }
 
@@ -243,12 +242,12 @@ int NoeudInstEcrire::executer(){
 }
 
 void NoeudInstEcrire::traduitCPP(ostream& cout, unsigned int indentation) const {
-    cout<<setw(4*indentation)<<""<<"cout <<";
+    cout<<setw(4*indentation)<<""<<"std::cout <<";
     for(int i=0;i<m_noeuds.size();i++){
         m_noeuds[i]->traduitCPP(cout,0);
         cout << "<<";
     }
-    cout << endl;
+    cout<<"std::endl";
 }
 
 
@@ -270,10 +269,9 @@ int NoeudInstLire::executer(){
 }
 
 void NoeudInstLire::traduitCPP(ostream& cout, unsigned int indentation) const {
-    cout<<setw(4*indentation)<<""<<"cin >>";
+    cout<<setw(4*indentation)<<""<<"std::cin >>";
     for(int i=0;i<m_variables_Lire.size();i++){
         m_variables_Lire[i]->traduitCPP(cout,0);
-        cout << ">>";
     }
     cout<<";"<<endl;
 }

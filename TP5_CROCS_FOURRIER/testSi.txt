@@ -10,7 +10,7 @@ procedure principale()
     test3 = 1;
 
     ## Exemple avec un si/sinon
-    si(1)
+    si(test1==1)
         test1 = 3;
     sinon
         test3 = 3;

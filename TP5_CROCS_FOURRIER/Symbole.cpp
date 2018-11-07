@@ -11,8 +11,8 @@ const char * Symbole::FICHIER_MOTS_CLES = "motsCles.txt";
 Symbole::Symbole(const string & s) : m_chaine(s) {
   // attention : l'ordre des tests ci-dessous n'est pas innocent !
   if (s == "") this->m_categorie = FINDEFICHIER;
-  else if (isdigit(s[0])) this->m_categorie = ENTIER;
-  else if (s.size() >= 2 && s[0] == '"' && s[s.size() - 1] == '"') this->m_categorie = CHAINE;
+  else if (isdigit(s[0])) this->m_categorie = ENTIER; // si ce sont des chiffres il fait un entier
+  else if (s.size() >= 2 && s[0] == '"' && s[s.size() - 1] == '"') this->m_categorie = CHAINE; // si il rencontre des " il créer une chaîne
   else if (isMotCle(s)) this->m_categorie = MOTCLE;
   else if (isalpha(s[0])) this->m_categorie = VARIABLE;
   else this->m_categorie = INDEFINI;
@@ -21,8 +21,8 @@ Symbole::Symbole(const string & s) : m_chaine(s) {
 bool Symbole::operator==(const string & ch) const {
   return this->m_chaine == ch ||
           (this->m_categorie == VARIABLE && (ch == "<VARIABLE>" || ch == "<variable>")) ||
-          (this->m_categorie == ENTIER && (ch == "<ENTIER>" || ch == "<entier>")) ||
-          (this->m_categorie == CHAINE && (ch == "<CHAINE>" || ch == "<chaine>")) ||
+          (this->m_categorie == ENTIER && (ch == "<ENTIER>" || ch == "<entier>")) || //utile pour écrire
+          (this->m_categorie == CHAINE && (ch == "<CHAINE>" || ch == "<chaine>")) || //utile pour écrire
           (this->m_categorie == INDEFINI && (ch == "<INDEFINI>" || ch == "<indefini>")) ||
           (this->m_categorie == FINDEFICHIER && (ch == "<FINDEFICHIER>" || ch == "<findefichier>"));
 }

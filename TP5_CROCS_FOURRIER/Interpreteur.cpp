@@ -63,7 +63,8 @@ Noeud* Interpreteur::seqInst() {
           m_lecteur.getSymbole() == "repeter" ||
           m_lecteur.getSymbole() == "pour"    ||
           m_lecteur.getSymbole() == "ecrire"  ||
-          m_lecteur.getSymbole() == "lire"
+          m_lecteur.getSymbole() == "lire"    
+          
           );
   // Tant que le symbole courant est un début possible d'instruction...
   // Il faut compléter cette condition chaque fois qu'on rajoute une nouvelle instruction
@@ -302,13 +303,13 @@ Noeud* Interpreteur::instLire() {
 }
 
 void Interpreteur::traduitCPP(ostream& cout, unsigned int indentation) const {
-    cout << setw(4*indentation) << "" << "\nint main() {"<<endl;
+    cout << setw(4*indentation) << "" << "\n#include <iostream>\n#include <stdlib.h>\n  int main() {"<<endl;
     
  
     for(int i=0; i<getTable().getTaille();i++)
     { 
         if(getTable()[i]=="<VARIABLE>"){
-            cout<<"int ";
+            cout<<"    int";
             getTable()[i].traduitCPP(cout,indentation);
             cout <<";"<<endl;
         }

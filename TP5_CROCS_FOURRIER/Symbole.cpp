@@ -61,3 +61,9 @@ ostream & operator<<(ostream & cout, const Symbole & symbole) {
   cout << " : \"" << symbole.m_chaine << "\"";
   return cout;
 }
+
+void Symbole::traduitEnCPP(ostream& cout, unsigned int indentation) const {
+        cout << setw(indentation) << ""<<getChaine();
+ 
+}
+

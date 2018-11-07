@@ -2,6 +2,7 @@
 #define SYMBOLE_H
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <string>
 using namespace std;
@@ -14,6 +15,7 @@ public:
 	inline bool operator != (const string  & ch) const { return ! (*this == ch); } // Pour tester la différence...
 	inline const string & getChaine() const { return m_chaine;} // Accesseur
 	friend ostream & operator <<(ostream & cout, const Symbole & symbole); // Fonction amie pour pouvoir afficher un symbole sur cout 
+        virtual void traduitEnCPP(ostream & cout, unsigned int indentation) const;;
 
 private:
     	enum m_categorie { MOTCLE, VARIABLE, ENTIER, CHAINE, INDEFINI, FINDEFICHIER };

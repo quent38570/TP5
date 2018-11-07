@@ -24,6 +24,9 @@ int main(int argc, char* argv[]) {
     if (interpreteur.getArbre()!=nullptr) interpreteur.getArbre()->executer();
     // Et on vérifie qu'il a fonctionné en regardant comment il a modifié la table des symboles
     cout << endl << "================ Table des symboles apres exécution : " << interpreteur.getTable();
+    cout << endl << "================ Résultat traduction c++ : ";
+    interpreteur.traduitCPP(cout,1);
+    
   } catch (InterpreteurException & e) {
     cout << e.what() << endl;
   }

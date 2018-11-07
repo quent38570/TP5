@@ -302,7 +302,16 @@ Noeud* Interpreteur::instLire() {
 }
 
 void Interpreteur::traduitCPP(ostream& cout, unsigned int indentation) const {
-    cout << setw(4*indentation) << "" << "int main() {"endl;
+    cout << setw(4*indentation) << "" << "int main() {"<<endl;
+    
+ 
+    for(int i=0; i<getTable().getTaille();i++)
+    { 
+        if(m_lecteur.getSymbole()=="VARIABLE"){
+            getTable()[i].traduitEnCPP(cout,0);
+        }
+    }
+    
     getArbre()->traduitCPP(cout,indentation+1);
     cout<<setw(4*(indentation+1))<<""<<"return 0;"<<endl;
     cout<<setw(4*indentation)<<"}"<<endl;

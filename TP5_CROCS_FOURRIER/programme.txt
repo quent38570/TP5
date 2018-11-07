@@ -1,6 +1,8 @@
 # Fichier de test
 # Les lignes de commentaires commencent par #
 procedure principale()
-    lire(a);
+    a = 2;
+    b = 3;
+    ecrire(b);
 finproc
 # Commentaire Final

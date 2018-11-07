@@ -1,0 +1,13 @@
+# Fichier de test du Erreur Syntaxe
+# Résultat attendu:
+#   3 erreurs
+
+procedure principale()
+    test = 1;
+    i = 1;
+    a 3;    # erreur: il manque le sine '='
+    a = 3   # erreur: il manque le signe ';'
+    b = a;  # erreur: la variable 'a' n'existe pas
+    
+finproc
+

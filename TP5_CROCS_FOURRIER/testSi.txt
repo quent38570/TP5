@@ -1,0 +1,28 @@
+# Fichier de test du si/siRiche
+# Résultat attendu:
+#   test1 = 3 
+#   test2 = 5
+#   test3 = 1
+
+procedure principale()
+    test1 = 1;
+    test2 = 1;
+    test3 = 1;
+
+    ## Exemple avec un si/sinon
+    si(1)
+        test1 = 3;
+    sinon
+        test3 = 3;
+    finsi
+    
+    ## A ce stade test1 = 3
+    ## Exemple avec un si/sinonsi sans sinon
+    si(test1 == 10)
+        test2 = 2;
+    sinonsi(test1 == 3)
+        test2 = 5;
+    finsi
+
+finproc
+

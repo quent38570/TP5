@@ -1,0 +1,20 @@
+# Fichier de test du Ecrire
+# Résultat attendu:
+#  " J'écris bien "
+#   2
+#   3
+#   5
+
+procedure principale()
+    variableChaine = "bien ";
+    a = 3;
+
+    ## Exemple avec un Ecrire->Chaine
+    ecrire(" J'écris ", variableChaine);
+    
+    ## Exemple avec un Ecrire->Entier
+    ecrire(2);
+    ecrire(a);
+    ecrire(a+2);
+finproc
+
